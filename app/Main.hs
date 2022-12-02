@@ -1,10 +1,14 @@
 module Main where
 
-import System.Environment
-import Debug.Trace
 import Day01.Ex as Day01
+import Day02.Ex as Day02
+import Debug.Trace
+import System.Environment
 
-days = [(Day01.part1, Day01.part2)]
+days =
+  [ (Day01.part1, Day01.part2),
+    (Day02.part1, Day02.part2)
+  ]
 
 main :: IO ()
 main = do
@@ -14,4 +18,3 @@ main = do
   content <- readFile file
   putStrLn $ fst (days !! day) content
   putStrLn $ snd (days !! day) content
- 
