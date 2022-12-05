@@ -30,6 +30,7 @@ executable aoc2022-hs
         Day02.Ex
         Day03.Ex
         Day04.Ex
+        Day05.Ex
 
     -- LANGUAGE extensions used by modules in this package.
     -- other-extensions:
