@@ -5,6 +5,7 @@ import Day02.Ex as Day02 (part1, part2)
 import Day03.Ex as Day03 (part1, part2)
 import Day04.Ex as Day04 (part1, part2)
 import Day05.Ex as Day05 (part1, part2)
+import Day06.Ex as Day06 (part1, part2)
 import System.Environment (getArgs)
 
 days =
@@ -12,7 +13,8 @@ days =
     (Day02.part1, Day02.part2),
     (Day03.part1, Day03.part2),
     (Day04.part1, Day04.part2),
-    (Day05.part1, Day05.part2)
+    (Day05.part1, Day05.part2),
+    (Day06.part1, Day06.part2)
   ]
 
 main :: IO ()
