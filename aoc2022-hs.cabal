@@ -32,6 +32,7 @@ executable aoc2022-hs
         Day04.Ex
         Day05.Ex
         Day06.Ex
+        Day07.Ex
 
     -- LANGUAGE extensions used by modules in this package.
     -- other-extensions:
@@ -39,6 +40,7 @@ executable aoc2022-hs
         base ^>=4.16,
         containers,
         split,
+        parsec,
     hs-source-dirs:
         app
     default-language: Haskell2010
