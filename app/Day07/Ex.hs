@@ -1,14 +1,15 @@
 module Day07.Ex (part1, part2) where
 
+import Control.Arrow (Arrow ((&&&)))
 import Control.Monad (void)
 import Data.Either (fromRight)
 import qualified Data.Map as Map
 import Data.Maybe (fromJust)
+import Debug.Trace (traceShow, traceShowId)
 import Text.Parsec (char, digit, many1, newline, oneOf, string, try)
 import Text.Parsec.Combinator (choice)
 import Text.Parsec.Prim (parse)
 import Text.Parsec.String (Parser)
-import Debug.Trace (traceShow)
 
 type Map = Map.Map
 
@@ -17,43 +18,23 @@ data LsEntry = File Int String | Dir String deriving (Show)
 data Command = Cd String | Ls [LsEntry] deriving (Show)
 
 num :: Parser Int
-num = do
-  n <- many1 digit
-  return $ read n
+num = read <$> many1 digit
 
-name :: Parser String
-name = do many1 $ oneOf (['a' .. 'z'] ++ "./")
-
-fileEntry :: Parser LsEntry
-fileEntry = do
-  number <- num
-  void $ char ' '
-  filename <- name
-  void newline
-  return $ File number filename
-
-dirEntry :: Parser LsEntry
-dirEntry = do
-  void $ string "dir "
-  dirname <- name
-  void newline
-  return $ Dir dirname
+path :: Parser String
+path = many1 $ oneOf (['a' .. 'z'] ++ "./")
 
 lsEntry :: Parser LsEntry
-lsEntry = choice [try dirEntry, fileEntry]
+lsEntry =
+  choice
+    [ try $ Dir <$> (string "dir " *> path <* newline),
+      try $ File <$> (num <* char ' ') <*> (path <* newline)
+    ]
 
 cdCommand :: Parser Command
-cdCommand = do
-  void $ string "$ cd "
-  cd <- name
-  void newline
-  return $ Cd cd
+cdCommand = Cd <$> (string "$ cd " *> path <* newline)
 
 lsCommand :: Parser Command
-lsCommand = do
-  void $ string "$ ls"
-  void newline
-  Ls <$> many1 lsEntry
+lsCommand = Ls <$> (string "$ ls" *> newline *> many1 lsEntry)
 
 commands :: Parser [Command]
 commands = many1 $ choice [try cdCommand, lsCommand]
