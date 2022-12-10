@@ -1,14 +1,15 @@
 module Day10.Ex (part1, part2) where
-import Data.List.Split (splitOn, chunksOf)
-import Debug.Trace (traceShowId)
+
 import Data.Bool (bool)
+import Data.List.Split (chunksOf, splitOn)
+import Debug.Trace (traceShowId)
 
 readInstruction :: [Char] -> [Int]
 readInstruction =
   choose . splitOn " "
-  where
-    choose ["noop"] = [0]
-    choose ["addx", count] = [0, read count]
+ where
+  choose ["noop"] = [0]
+  choose ["addx", count] = [0, read count]
 
 strengthAt :: [Int] -> Int -> Int
 strengthAt list n = n * list !! (n - 1)
@@ -29,10 +30,10 @@ part1 =
 
 part2 :: String -> String
 part2 =
-   unlines
-  . chunksOf 40
-  . map (bool '.' '#')
-  . zipWith pixelVisible (cycle [0..39])
-  . scanl (+) 1
-  . concatMap readInstruction
-  . lines
+  unlines
+    . chunksOf 40
+    . map (bool '.' '#')
+    . zipWith pixelVisible (cycle [0 .. 39])
+    . scanl (+) 1
+    . concatMap readInstruction
+    . lines

@@ -10,11 +10,11 @@ readInput = map (map read . chunksOf 1) . lines
 
 visibleFromStart :: [Int] -> [Bool]
 visibleFromStart = recurse (-1)
-  where
-    recurse _ [] = []
-    recurse max (x : xs)
-      | x > max = True : recurse x xs
-      | otherwise = False : recurse max xs
+ where
+  recurse _ [] = []
+  recurse max (x : xs)
+    | x > max = True : recurse x xs
+    | otherwise = False : recurse max xs
 
 countUntil :: (a -> Bool) -> [a] -> Int
 countUntil _ [] = 0

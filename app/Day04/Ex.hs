@@ -7,8 +7,8 @@ type Range = ((Int, Int), (Int, Int))
 readRangePair :: String -> Range
 readRangePair str =
   ((a, b), (c, d))
-  where
-    [[a, b], [c, d]] = map (map read . splitOn "-") $ splitOn "," str
+ where
+  [[a, b], [c, d]] = map (map read . splitOn "-") $ splitOn "," str
 
 checkFullOverlap :: Range -> Bool
 checkFullOverlap ((a, b), (c, d))
@@ -17,7 +17,7 @@ checkFullOverlap ((a, b), (c, d))
   | otherwise = False
 
 checkAnyOverlap :: Range -> Bool
-checkAnyOverlap ((a, b), (c, d)) = a <= d && c <= b 
+checkAnyOverlap ((a, b), (c, d)) = a <= d && c <= b
 
 part1 :: String -> String
 part1 str =

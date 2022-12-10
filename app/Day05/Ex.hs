@@ -30,7 +30,7 @@ step :: ([a] -> [a]) -> [[a]] -> (Int, Int, Int) -> [[a]]
 step operation state (count, from, to) =
   let (moved, newFrom) = splitAt count (state !! from)
       newTo = operation moved ++ (state !! to)
-   in update to newTo $ update from newFrom  state
+   in update to newTo $ update from newFrom state
 
 part1 :: String -> String
 part1 str =
@@ -44,4 +44,3 @@ part2 str =
    in foldl (step id) state moves
         & map head
         & show
-

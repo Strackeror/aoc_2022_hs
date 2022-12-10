@@ -1,7 +1,7 @@
 module Day01.Ex (part1, part2) where
 
-import Data.List.Split
 import Data.List
+import Data.List.Split
 
 sums :: String -> [Int]
 sums str = map (sum . (map read . splitOn "\n")) (splitOn "\n\n" str)

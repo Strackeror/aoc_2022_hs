@@ -39,7 +39,6 @@ findResult Win rps = win rps
 findResult Draw rps = rps
 findResult Lose rps = lose rps
 
-
 biscore :: RPS -> RPS -> Int
 biscore a b
   | a == b = score b + 3
