@@ -13,23 +13,16 @@ readInstruction =
 strengthAt :: [Int] -> Int -> Int
 strengthAt list n = n * list !! (n - 1)
 
-mapWith :: (a -> b -> c) -> a -> [b] -> [c]
-mapWith f param = map (f param)
-
-strengthList :: [Int] -> [Int] -> [Int]
-strengthList = flip (mapWith strengthAt)
-
 pixelVisible :: Int -> Int -> Bool
 pixelVisible index value = abs (value - index) <= 1
-
-toCrt :: [[Bool]] -> String
-toCrt = unlines . map (map $ bool ' ' '#')
 
 part1 :: String -> String
 part1 =
   show
     . sum
-    . strengthList [20, 60, 100, 140, 180, 220]
+    . traceShowId
+    . flip map [20, 60, 100, 140, 180, 220]
+    . strengthAt
     . scanl (+) 1
     . concatMap readInstruction
     . lines
