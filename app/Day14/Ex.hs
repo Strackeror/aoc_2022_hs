@@ -55,7 +55,7 @@ insertGrain floor grain state@State{..} = case dropGrain floor grain state of
 
 dropGrain :: Bool -> (Int, Int) -> State -> Maybe (Int, Int)
 dropGrain floor start State{..}
-  | Set.member start fullSet = Nothing
+  | Set.member start sand = Nothing
   | otherwise = go start
  where
   fullSet = Set.union walls sand
